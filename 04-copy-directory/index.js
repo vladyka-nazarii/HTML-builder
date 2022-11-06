@@ -8,7 +8,6 @@ async function copyDir(from, to) {
     await fs.promises.mkdir(to, { recursive: true });
     fs.readdir(from, {withFileTypes: true}, (err, files) => {
       if (err) throw err;
-      files.sort((a, b) => a.name - b.name);
       files.forEach(async element => {
         if (element.isFile()) {
           await fs.promises.copyFile(path.join(from, element.name), path.join(to, element.name));
@@ -21,6 +20,6 @@ async function copyDir(from, to) {
     console.log('The folder was copied successfully');
   } catch {
     console.log('The folder could not be copied');
-  }
+  };
 };
 copyDir(source, destination);
